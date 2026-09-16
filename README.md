@@ -8,6 +8,11 @@ cd Todofile
 composer install
 ```
 
+## 実行
+```
+./todofile hello
+```
+
 ## 初期メモ (ガチであんま関係ない)
 
 ### 依存関係
@@ -15,4 +20,3 @@ composer install
 composer require --dev phpunit/phpunit phpstan/phpstan
 composer require symfony/console
 ```
-
