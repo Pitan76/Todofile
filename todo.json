@@ -1,0 +1,9 @@
+{
+  "test": [
+    "vendor/bin/phpunit"
+  ],
+  "lint": "vendor/bin/phpstan analyse",
+  "composer": [
+    "composer install"
+  ]
+}
