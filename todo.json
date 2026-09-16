@@ -2,7 +2,7 @@
   "test": [
     "vendor/bin/phpunit"
   ],
-  "lint": "vendor/bin/phpstan analyse",
+  "lint": "vendor/bin/phpstan analyse src",
   "composer": [
     "composer install"
   ]
