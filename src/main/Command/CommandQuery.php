@@ -1,5 +1,5 @@
 <?php
-namespace Pitan76\Todofile;
+namespace Pitan76\Todofile\Command;
 
 /**
  * コマンド命令

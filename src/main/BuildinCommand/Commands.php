@@ -1,5 +1,5 @@
 <?php
-namespace Pitan76\Todofile\Command;
+namespace Pitan76\Todofile\BuildinCommand;
 
 use Pitan76\Todofile\Main;
 use Symfony\Component\Console\Command\Command;

@@ -1,5 +1,5 @@
 <?php
-namespace Pitan76\Todofile;
+namespace Pitan76\Todofile\Command;
 
 use Pitan76\Todofile\Exception\CommandExecuteException;
 

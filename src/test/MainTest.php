@@ -3,8 +3,8 @@ namespace Pitan76\Todofile\Test;
 
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Pitan76\Todofile\CommandExecutor;
-use Pitan76\Todofile\CommandQuery;
+use Pitan76\Todofile\Command\CommandExecutor;
+use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Main;
 use Pitan76\Todofile\Task;
 

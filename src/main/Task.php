@@ -1,6 +1,8 @@
 <?php
 namespace Pitan76\Todofile;
 
+use Pitan76\Todofile\Command\CommandQuery;
+
 class Task {
     /**
      * タスク名

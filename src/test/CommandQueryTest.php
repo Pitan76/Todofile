@@ -3,7 +3,7 @@ namespace Pitan76\Todofile\Test;
 
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Pitan76\Todofile\CommandQuery;
+use Pitan76\Todofile\Command\CommandQuery;
 
 class CommandQueryTest extends TestCase {
     #[TestDox('コマンド命令の文字列を正しく分割しとる')]

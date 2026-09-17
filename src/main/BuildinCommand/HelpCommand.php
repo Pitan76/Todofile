@@ -1,5 +1,5 @@
 <?php
-namespace Pitan76\Todofile\Command;
+namespace Pitan76\Todofile\BuildinCommand;
 
 use Override;
 use Symfony\Component\Console\Command\Command;

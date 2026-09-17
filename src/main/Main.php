@@ -2,7 +2,9 @@
 namespace Pitan76\Todofile;
 
 use Exception;
-use Pitan76\Todofile\Command\Commands;
+use Pitan76\Todofile\BuildinCommand\Commands;
+use Pitan76\Todofile\Command\CommandExecutor;
+use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Exception\CommandExecuteException;
 use Pitan76\Todofile\Exception\TaskNotFoundException;
 use Symfony\Component\Console\Application;
