@@ -6,10 +6,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class HelloCommand extends Command {
+class HelpCommand extends Command {
 
     #[Override]
-    protected static $defaultName = 'hello';
+    protected static $defaultName = '@help';
 
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int {

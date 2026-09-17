@@ -9,7 +9,7 @@ class Commands {
      * コマンドを追加する
      */
     public static function init(): void {
-        self::register(new HelloCommand());
+        self::register(new HelpCommand());
     }
 
     /**

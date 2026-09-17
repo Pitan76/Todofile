@@ -127,6 +127,7 @@ class Main {
         while ($query = $task->next()) {
             $query = $this->resolveCommand($query);
 
+            // コマンド実行
             $exitCode = $this->executor->execute($query);
 
             // 異常終了の場合はそのまま異常終了とする
