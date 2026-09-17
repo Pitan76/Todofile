@@ -1,4 +1,4 @@
-# Todofile
+# Todofile v0.0.1
 PHP製CLIタスクランナー
 
 ## セットアップ
