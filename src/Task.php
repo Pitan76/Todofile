@@ -8,22 +8,22 @@ class Task {
     public string $name;
 
     /**
-     * @var array<string> コマンドの配列
+     * @var array<CommandQuery> コマンド命令の配列
      */
     public array $commands;
 
     /**
-     * @var int 現在の実行コマンド行
+     * @var int 現在の実行している行
      */
     private int $index = 0;
 
     /**
      * @param string $name タスク名
-     * @param array $commands コマンドの配列
+     * @param array<CommandQuery> $queries コマンド命令の配列
      */
-    public function __construct(string $name, array $commands = []) {
+    public function __construct(string $name, array $queries = []) {
         $this->name = $name;
-        $this->commands = $commands;
+        $this->commands = $queries;
     }
 
     /**
@@ -34,9 +34,9 @@ class Task {
     }
 
     /**
-     * @return string|null 現在のコマンドを返してから次へ進む
+     * @return CommandQuery|null 現在のコマンド命令を返してから次へ進む
      */
-    public function next(): ?string {
+    public function next(): ?CommandQuery {
         if ($this->index >= count($this->commands))
             return null;
 
@@ -44,14 +44,14 @@ class Task {
     }
 
     /**
-     * @return string|null 現在のコマンド
+     * @return CommandQuery|null 現在のコマンド命令
      */
-    public function current(): ?string {
+    public function current(): ?CommandQuery {
         return $this->commands[$this->index] ?? null;
     }
 
     /**
-     * @return int コマンド数
+     * @return int 行数
      */
     public function length(): int {
         return count($this->commands);
@@ -65,20 +65,20 @@ class Task {
     }
 
     /**
-     * @param string $command コマンド
+     * @param CommandQuery $command コマンド命令
      */
-    public function addCommand(string $command): void {
+    public function addCommand(CommandQuery $command): void {
         $this->commands[] = $command;
     }
 
     /**
-     * @param array<string> $commands コマンドの配列
+     * @param array<CommandQuery> $commands コマンド命令の配列
      */
     public function addCommands(array $commands): void {
         $this->commands = array_merge($this->commands, $commands);
     }
 
     public function __toString(): string {
-        return $this->name;
+        return $this->getName();
     }
 }
