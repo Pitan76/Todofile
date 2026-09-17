@@ -3,7 +3,7 @@ namespace Pitan76\Todofile;
 
 use Exception;
 use Pitan76\Todofile\Command\Commands;
-use Pitan76\Todofile\Exception\TaskEmptyException;
+use Pitan76\Todofile\Exception\CommandExecuteException;
 use Pitan76\Todofile\Exception\TaskNotFoundException;
 use Symfony\Component\Console\Application;
 
@@ -118,7 +118,7 @@ class Main {
             $process = proc_open($query, $descriptors, $pipes);
 
             // todo: ここは続行するかどうかをtodo.jsonで決めれるようにすべき
-            if (!is_resource($process)) throw new Exception($query);
+            if (!is_resource($process)) throw new CommandExecuteException($query);
             // プロセスの終了を待ち、終了コードを取得
             $exitCode = proc_close($process);
 
