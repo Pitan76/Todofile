@@ -55,8 +55,6 @@ class Main {
         $task = $this->parseTask($taskName);
 
         return $this->runTask($task);
-
-//        return $this->app->run();
     }
 
 
@@ -89,32 +87,45 @@ class Main {
     }
 
     /**
-     * @throws Exception
+     * OSごとのコマンド名解決
+     *
+     * @param CommandQuery $query コマンド命令
+     * @return CommandQuery 解決後コマンド命令
+     */
+    public function resolveCommand(CommandQuery $query): CommandQuery {
+        $cmd = $query->cmd;
+        $args = $query->args;
+
+        // Windowsの場合はbat, cmdを付加する
+        if (PHP_OS_FAMILY == "Windows") {
+            $basename = pathinfo($cmd, PATHINFO_EXTENSION);
+
+            // 拡張子なし
+            if ($basename === "") {
+                if (file_exists($cmd . '.bat'))
+                    $cmd = "\"./" . $cmd . '.bat' . "\"";
+
+                if (file_exists($cmd . '.cmd'))
+                    $cmd = "\"./" . $cmd . '.cmd' . "\"";
+
+                $query = new CommandQuery($cmd, $args);
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * タスクを実行する
+     *
+     * @param Task $task タスク
+     * @return int 終了コード
+     * @throws CommandExecuteException
      */
     public function runTask(Task $task): int {
 
         while ($query = $task->next()) {
-            $cmd = $query->cmd;
-            $args = $query->args;
-
-            if (PHP_OS_FAMILY == "Windows") {
-                sapi_windows_vt100_support(STDOUT, true);
-                sapi_windows_vt100_support(STDERR, true); // エラー出力用
-
-                // Windowsの場合はbat, cmdを付加する (なお、今後この処理は切り出すべき)
-
-                // 拡張子なし
-                if (pathinfo($cmd, PATHINFO_EXTENSION) === '') {
-
-                    if (file_exists($cmd . '.bat'))
-                        $cmd = "\"./" . $cmd . '.bat' . "\"";
-
-                    else if (file_exists($cmd . '.cmd'))
-                        $cmd = "\"./" . $cmd . '.cmd' . "\"";
-
-                    $query = new CommandQuery($cmd, $args);
-                }
-            }
+            $query = $this->resolveCommand($query);
 
             $exitCode = $this->executor->execute($query);
 
