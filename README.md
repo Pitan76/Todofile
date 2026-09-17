@@ -20,3 +20,8 @@ composer install
 composer require --dev phpunit/phpunit phpstan/phpstan
 composer require symfony/console
 ```
+
+### composer.jsonを変えたらコレ
+```bash
+composer dump-autoload
+```

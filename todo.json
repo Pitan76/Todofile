@@ -1,6 +1,6 @@
 {
   "test": [
-    "vendor/bin/phpunit"
+    "vendor/bin/phpunit --testdox"
   ],
   "lint": "vendor/bin/phpstan analyse src",
   "composer": [

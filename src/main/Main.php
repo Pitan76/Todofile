@@ -10,9 +10,14 @@ use Symfony\Component\Console\Application;
 class Main {
 
     /**
-     * symfony/console CLIのアプリケーション
+     * @var Application symfony/console CLIのアプリケーション
      */
     public Application $app;
+
+    /**
+     * @var CommandExecutor コマンド実行するクラス
+     */
+    public CommandExecutor $executor;
 
     /**
      * タスクファイル名
@@ -24,6 +29,8 @@ class Main {
     public function __construct() {
         // CLIアプリケーション初期化
         $this->app = new Application('Todofile');
+        $this->executor = new CommandExecutor();
+
         self::$INSTANCE = $this;
 
         // コマンド登録
@@ -85,6 +92,7 @@ class Main {
      * @throws Exception
      */
     public function runTask(Task $task): int {
+
         while ($query = $task->next()) {
             $cmd = $query->cmd;
             $args = $query->args;
@@ -108,19 +116,7 @@ class Main {
                 }
             }
 
-            // コマンドを実行する
-            $descriptors = [
-                0 => STDIN,  // 標準入力
-                1 => STDOUT, // 標準出力
-                2 => STDERR  // 標準エラー
-            ];
-
-            $process = proc_open($query, $descriptors, $pipes);
-
-            // todo: ここは続行するかどうかをtodo.jsonで決めれるようにすべき
-            if (!is_resource($process)) throw new CommandExecuteException($query);
-            // プロセスの終了を待ち、終了コードを取得
-            $exitCode = proc_close($process);
+            $exitCode = $this->executor->execute($query);
 
             // 異常終了の場合はそのまま異常終了とする
             if ($exitCode !== 0)

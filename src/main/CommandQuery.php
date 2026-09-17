@@ -53,7 +53,8 @@ class CommandQuery {
      * @return string コマンド命令の文字列
      */
     public function getString(): string {
-        return $this->cmd . ' ' . $this->args;
+        return ($this->args !== "")
+            ? $this->cmd . ' ' . $this->args : $this->cmd;
     }
 
     /**

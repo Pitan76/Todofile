@@ -12,7 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pitan76\\Todofile\\": "src/"
+            "Pitan76\\Todofile\\": "src/main/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pitan76\\Todofile\\Test\\": "src/test/"
         }
     },
     "bin": [
