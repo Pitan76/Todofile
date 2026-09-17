@@ -1,9 +1,13 @@
 {
+  "hello": [
+    "echo hello"
+  ],
   "test": [
     "vendor/bin/phpunit --testdox"
   ],
   "lint": "vendor/bin/phpstan analyse src",
   "composer": [
     "composer install"
-  ]
+  ],
+  "composer-reload": "composer dump-autoload"
 }

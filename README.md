@@ -10,7 +10,16 @@ composer install
 
 ## 実行
 ```
+# hello
 ./todofile hello
+```
+
+```
+# 静的解析
+./todofile lint
+
+# テスト
+./todofile test
 ```
 
 ## 初期メモ (ガチであんま関係ない)
@@ -23,5 +32,11 @@ composer require symfony/console
 
 ### composer.jsonを変えたらコレ
 ```bash
+# composer直呼び
 composer dump-autoload
+
+# or
+
+# todofileでやってみる
+./todofile composer-reload
 ```
