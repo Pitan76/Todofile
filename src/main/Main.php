@@ -5,17 +5,13 @@ use Exception;
 use Pitan76\Todofile\BuildinCommand\Commands;
 use Pitan76\Todofile\Command\CommandExecutor;
 use Pitan76\Todofile\Command\CommandQuery;
+use Pitan76\Todofile\Config\Config;
 use Pitan76\Todofile\Exception\CommandExecuteException;
 use Pitan76\Todofile\Task\Task;
 use Pitan76\Todofile\Task\TaskParser;
 use Symfony\Component\Console\Application;
 
 class Main {
-
-    // symfony/console CLIのアプリケーション
-    public Application $app;
-    public CommandExecutor $executor;
-    public TaskParser $taskParser;
 
     /**
      * タスクファイル名
@@ -24,11 +20,22 @@ class Main {
 
     public static Main $INSTANCE;
 
+    public static Config $config;
+
+    // symfony/console CLIのアプリケーション
+    public Application $app;
+    public CommandExecutor $executor;
+    public TaskParser $taskParser;
+    public TodofileLoader $todofileLoader;
+
     public function __construct() {
         // CLIアプリケーション初期化
         $this->app = new Application('Todofile');
         $this->executor = new CommandExecutor();
-        $this->taskParser = new TaskParser(self::FILENAME);
+        $this->todofileLoader = new TodofileLoader(self::FILENAME);
+        $this->taskParser = new TaskParser($this->todofileLoader);
+
+        self::$config = new Config($this->todofileLoader);
 
         self::$INSTANCE = $this;
 

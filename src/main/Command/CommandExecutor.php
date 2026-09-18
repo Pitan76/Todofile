@@ -1,7 +1,9 @@
 <?php
 namespace Pitan76\Todofile\Command;
 
+use Pitan76\Todofile\Config\Config;
 use Pitan76\Todofile\Exception\CommandExecuteException;
+use Pitan76\Todofile\Main;
 
 class CommandExecutor {
 
@@ -22,8 +24,7 @@ class CommandExecutor {
         // コマンドを実行する
         $process = proc_open($query, self::_getDescriptors(), $pipes);
 
-        // todo: ここは続行するかどうかをtodo.jsonで決めれるようにすべき
-        if (!is_resource($process)) throw new CommandExecuteException($query);
+        if (!is_resource($process) && !Main::$config->ignoreCommandExecuteException()) throw new CommandExecuteException($query);
 
         // プロセスの終了を待ち、終了コードを取得
         return proc_close($process);

@@ -3,13 +3,14 @@ namespace Pitan76\Todofile\Task;
 
 use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Exception\TaskNotFoundException;
+use Pitan76\Todofile\TodofileLoader;
 
 class TaskParser {
 
-    public string $filename;
+    public TodofileLoader $todofileLoader;
 
-    public function __construct(string $filename) {
-        $this->filename = $filename;
+    public function __construct(TodofileLoader $todofileLoader) {
+        $this->todofileLoader = $todofileLoader;
     }
 
     /**
@@ -21,7 +22,7 @@ class TaskParser {
      */
     public function parse(string $taskName): Task {
         // タスクファイルの読み込み
-        $data = json_decode(file_get_contents($this->filename), true);
+        $data = $this->todofileLoader->data;
 
         $commands = $data[$taskName] ?? null;
 

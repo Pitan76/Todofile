@@ -1,4 +1,7 @@
 {
+  "@config": {
+    "ignoreCommandExecuteException": false
+  },
   "hello": [
     "echo hello"
   ],
