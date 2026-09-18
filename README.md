@@ -1,6 +1,8 @@
 # Todofile v0.0.1
 PHP製CLIタスクランナー
 
+Todofileは `todo.json` で定義します
+
 ## セットアップ
 ```bash
 git clone https://github.com/Pitan76/Todofile.git
