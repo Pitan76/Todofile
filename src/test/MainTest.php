@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Pitan76\Todofile\Command\CommandExecutor;
 use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Main;
-use Pitan76\Todofile\Task;
+use Pitan76\Todofile\Task\Task;
 
 class MainTest extends TestCase {
 

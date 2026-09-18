@@ -2,7 +2,7 @@
 namespace Pitan76\Todofile\Exception;
 
 use Exception;
-use Pitan76\Todofile\Task;
+use Pitan76\Todofile\Task\Task;
 
 /**
  * タスクが存在しない時の例外

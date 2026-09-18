@@ -6,20 +6,16 @@ use Pitan76\Todofile\BuildinCommand\Commands;
 use Pitan76\Todofile\Command\CommandExecutor;
 use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Exception\CommandExecuteException;
-use Pitan76\Todofile\Exception\TaskNotFoundException;
+use Pitan76\Todofile\Task\Task;
+use Pitan76\Todofile\Task\TaskParser;
 use Symfony\Component\Console\Application;
 
 class Main {
 
-    /**
-     * @var Application symfony/console CLIのアプリケーション
-     */
+    // symfony/console CLIのアプリケーション
     public Application $app;
-
-    /**
-     * @var CommandExecutor コマンド実行するクラス
-     */
     public CommandExecutor $executor;
+    public TaskParser $taskParser;
 
     /**
      * タスクファイル名
@@ -32,6 +28,7 @@ class Main {
         // CLIアプリケーション初期化
         $this->app = new Application('Todofile');
         $this->executor = new CommandExecutor();
+        $this->taskParser = new TaskParser(self::FILENAME);
 
         self::$INSTANCE = $this;
 
@@ -49,43 +46,15 @@ class Main {
         global $argv;
 
         $taskName = $argv[1] ?? null;
-        if ($taskName === null) {
-            $this->app->getHelp();
+
+        if ($taskName === null || $taskName[0] === "!" ) {
+            $this->app->run();
             return 0;
         }
 
-        $task = $this->parseTask($taskName);
+        $task = $this->taskParser->parse($taskName);
 
         return $this->runTask($task);
-    }
-
-
-    /**
-     * タスクファイルを読み込んでタスクを作成する
-     *
-     * @param string $taskName タスク名
-     * @return Task タスク
-     * @throws TaskNotFoundException
-     */
-    public function parseTask(string $taskName): Task {
-        // タスクファイルの読み込み
-        $data = json_decode(file_get_contents(self::FILENAME), true);
-
-        $commands = $data[$taskName] ?? null;
-
-        // タスクが存在しない
-        if ($commands === null) throw new TaskNotFoundException($taskName);
-
-        // 文字列である場合は配列にする
-        if (is_string($commands))
-            $commands = [$commands];
-
-        $queries = [];
-        for ($i = 0; $i < count($commands); $i++) {
-            $queries[$i] = CommandQuery::fromString($commands[$i]);
-        }
-
-        return new Task($taskName, $queries);
     }
 
     /**

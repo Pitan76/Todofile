@@ -4,7 +4,7 @@ namespace Pitan76\Todofile\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Pitan76\Todofile\Command\CommandQuery;
-use Pitan76\Todofile\Task;
+use Pitan76\Todofile\Task\Task;
 
 class TaskTest extends TestCase {
     #[TestDox('入れたコマンド命令の数とlengthが一致するとちゃいまっかー')]

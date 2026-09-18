@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class HelpCommand extends Command {
 
     #[Override]
-    protected static $defaultName = '@help';
+    protected static $defaultName = '!help';
 
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int {
