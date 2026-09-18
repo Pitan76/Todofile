@@ -10,8 +10,8 @@ class TaskTest extends TestCase {
     #[TestDox('入れたコマンド命令の数とlengthが一致するとちゃいまっかー')]
     public function testLengthMatchesNumberOfCommands(): void {
         $queries = [
-            CommandQuery::fromString("1+1"),
-            CommandQuery::fromString("1+2"),
+            CommandQuery::parseString("1+1"),
+            CommandQuery::parseString("1+2"),
         ];
 
         $task = new Task("sum", $queries);
@@ -21,7 +21,7 @@ class TaskTest extends TestCase {
     #[TestDox('次のコマンド命令がないときはnullを返すであろう')]
     public function testReturnsNullWhenNoNextCommandExists(): void {
         $queries = [
-            CommandQuery::fromString("1+1"),
+            CommandQuery::parseString("1+1"),
         ];
 
         $task = new Task("sum", $queries);
@@ -34,9 +34,9 @@ class TaskTest extends TestCase {
     #[TestDox('次のコマンドは一致するに決まっとる')]
     public function testNextReturnsFollowingCommand(): void {
         $queries = [
-            CommandQuery::fromString("hoge"),
-            CommandQuery::fromString("fuge"),
-            CommandQuery::fromString("hage"),
+            CommandQuery::parseString("hoge"),
+            CommandQuery::parseString("fuge"),
+            CommandQuery::parseString("hage"),
         ];
 
         $task = new Task("test", $queries);

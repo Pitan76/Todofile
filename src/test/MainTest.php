@@ -13,9 +13,9 @@ class MainTest extends TestCase {
     #[TestDox("タスク内のコマンドをすべてCommandExecutorに渡す")]
     public function testExecutesAllCommandsInTask(): void {
         $queries = [
-            CommandQuery::fromString("hoge"),
-            CommandQuery::fromString("fuge"),
-            CommandQuery::fromString("piyo"),
+            CommandQuery::parseString("hoge"),
+            CommandQuery::parseString("fuge"),
+            CommandQuery::parseString("piyo"),
         ];
 
         $count = count($queries);

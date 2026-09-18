@@ -35,7 +35,7 @@ class TaskParser {
 
         $queries = [];
         for ($i = 0; $i < count($commands); $i++) {
-            $queries[$i] = CommandQuery::fromString($commands[$i]);
+            $queries[$i] = CommandQuery::parseString($commands[$i]);
         }
 
         return new Task($taskName, $queries);

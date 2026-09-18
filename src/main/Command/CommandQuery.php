@@ -29,10 +29,45 @@ class CommandQuery {
      * @param string $str コマンド命令の文字列
      * @return CommandQuery コマンド命令
      */
-    public static function fromString(string $str): CommandQuery {
-        $parts = preg_split('/\s+/', $str, 2);
+    public static function parseString(string $str): CommandQuery {
+        $parts = self::parseAsParts($str);
 
         return new CommandQuery($parts[0], $parts[1] ?? "");
+    }
+
+    /**
+     * @param string $str 文字列
+     * @return array<string, string> パーツ
+     */
+    private static function parseAsParts(string $str): array {
+        $length = strlen($str);
+        $quote = null;
+
+        for ($i = 0; $i < $length; $i++) {
+            $char = $str[$i];
+
+            if ($char === '"' || $char === "'") {
+                if ($quote === null) {
+                    $quote = $char;
+                    continue;
+                }
+
+                if ($quote === $char)
+                    $quote = null;
+
+                continue;
+            }
+
+            // クォート外の最初の空白
+            if (ctype_space($char) && $quote === null) {
+                return [
+                    substr($str, 0, $i),
+                    ltrim(substr($str, $i)),
+                ];
+            }
+        }
+
+        return [$str, ''];
     }
 
     /**
