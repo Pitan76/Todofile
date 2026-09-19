@@ -8,8 +8,8 @@ use Pitan76\Todofile\Exception\TodoFileNotFoundException;
 class TodofileLoader {
 
     // タスクファイル名
-    public const string FILENAME = "todo.json";
-    public const string FILENAME_JSON5 = "todo.json5"; // コメントできる版
+    public const string FILENAME = "todofile.json";
+    public const string FILENAME_JSON5 = "todofile.json5"; // コメントできる版
 
     public array $data = [];
 

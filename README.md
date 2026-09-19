@@ -13,7 +13,7 @@ composer global require pitan76/todo
 ```
 
 ### todofile.json の作成
-`todofile.json5` はTodofileが読み込むタスクファイルで、実行するコマンドや設定を定義します。<br />
+`todofile.json5` もしくは `todofile.json` はTodofileが読み込むタスクファイルで、実行するコマンドや設定を定義します。<br />
 設定は以下のとおりです。
 
 ```json
@@ -29,7 +29,7 @@ composer global require pitan76/todo
 
 #### 例
 
-```json
+```json5
 {
   // 設定
   "@config": {
