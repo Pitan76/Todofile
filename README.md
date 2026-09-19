@@ -18,6 +18,19 @@ composer global require pitan76/todo
 
 ```json
 {
+  "<タスク名>": "<コマンド>",
+  "<タスク名>": [
+    "<コマンド1>",
+    "<コマンド2>"
+  ]
+}
+
+```
+
+#### 例
+
+```json
+{
   // 設定
   "@config": {
     // コマンド実行エラーを無視して次のコマンドを実行する
@@ -35,6 +48,11 @@ composer global require pitan76/todo
 }
 ```
 
+### 実行
+```bash
+todo <タスク名>
+```
+
 ## セットアップ
 ```bash
 git clone git@github.com:Pitan76/Todofile.git
@@ -46,15 +64,15 @@ composer install
 ## 実行
 ```
 # hello
-./todofile hello
+./todo hello
 ```
 
 ```
 # 静的解析
-./todofile lint
+./todo lint
 
 # テスト
-./todofile test
+./todo test
 ```
 
 ## 初期メモ (ガチであんま関係ない)
