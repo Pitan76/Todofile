@@ -1,4 +1,4 @@
-# Todofile v0.0.5
+# Todofile v0.0.6
 PHP製CLIタスクランナー
 
 Todofileは `todofile.json5` もしくは `todofile.json` で定義します（引数`-f`, `--file=`でファイル名を指定可能）
@@ -55,6 +55,21 @@ composer global update pitan76/todofile
 ### 実行
 ```bash
 todo <タスク名>
+```
+
+#### オプション
+```bash
+# ファイル指定
+todo <タスク名> -f ファイル名
+
+todo <タスク名> --file=ファイル名
+
+# バージョン情報
+todo -v
+
+todo --version
+
+
 ```
 
 ## セットアップ
