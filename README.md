@@ -9,7 +9,7 @@ Todofileは `todofile.json5` もしくは `todofile.json` で定義します（�
 ※インストールにはPHPのパッケージマネージャである https://getcomposer.org/ が必要です。
 
 ```bash
-composer global require pitan76/todo
+composer global require pitan76/todofile
 ```
 
 ### todofile.json の作成
