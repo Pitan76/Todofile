@@ -1,2 +1,2 @@
 @echo off
-php run.php
+php run.php %*

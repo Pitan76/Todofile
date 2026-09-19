@@ -42,12 +42,18 @@ class Main {
             $def = new InputDefinition([
                 new InputArgument('task', InputArgument::OPTIONAL),
                 new InputOption('file', 'f', InputOption::VALUE_REQUIRED),
+                new InputOption('version', 'v', InputOption::VALUE_NONE),
             ]);
             $this->input = new ArgvInput($argv, $def);
+
+            if ($this->input->getOption("version")) {
+                echo "v0.0.6";
+                exit(0);
+            }
         }
 
         $this->executor = new CommandExecutor();
-        $this->todofileLoader = new TodofileLoader($this->getOption('file'));
+        $this->todofileLoader = new TodofileLoader($this->getOption("file"));
         $this->taskParser = new TaskParser($this->todofileLoader);
 
         self::$config = new Config($this->todofileLoader);
@@ -65,7 +71,7 @@ class Main {
      * @throws Exception
      */
     public function run(): int {
-        $taskName = $this->input->getFirstArgument();
+        $taskName = $this->getInput()->getArgument("task");
 
         if ($taskName === null || $taskName[0] === "!" ) {
             $this->app->run();
