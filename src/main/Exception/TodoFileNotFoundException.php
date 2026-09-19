@@ -8,7 +8,7 @@ use Exception;
  */
 class TodoFileNotFoundException extends Exception {
 
-    public function __construct() {
-        parent::__construct("Task file is not found. Please create todofile.json5 or todofile.json.");
+    public function __construct(string $filename = "todofile.json5 or todofile.json") {
+        parent::__construct("{$filename} is not found.");
     }
 }

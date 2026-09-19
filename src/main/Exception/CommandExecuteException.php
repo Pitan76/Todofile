@@ -9,7 +9,7 @@ use Exception;
  */
 class CommandExecuteException extends Exception {
 
-    public function __construct($query) {
+    public function __construct(string $query) {
         parent::__construct("Command execute failed: {$query}");
     }
 }

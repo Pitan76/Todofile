@@ -1,32 +1,53 @@
 <?php
 namespace Pitan76\Todofile;
 
+use ColinODell\Json5\SyntaxError;
 use Exception;
 use Pitan76\Todofile\BuildinCommand\Commands;
 use Pitan76\Todofile\Command\CommandExecutor;
 use Pitan76\Todofile\Command\CommandQuery;
 use Pitan76\Todofile\Config\Config;
 use Pitan76\Todofile\Exception\CommandExecuteException;
+use Pitan76\Todofile\Exception\TodoFileNotFoundException;
+use Pitan76\Todofile\Exception\UnsupportedExtensionException;
 use Pitan76\Todofile\Task\Task;
 use Pitan76\Todofile\Task\TaskParser;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 
 class Main {
 
     public static Main $INSTANCE;
     public static Config $config;
 
-    // symfony/console CLIのアプリケーション
-    public Application $app;
+    public Application $app; // symfony/console CLIのアプリケーション
+    public ?ArgvInput $input = null; // 引数、オプションなど
+
     public CommandExecutor $executor;
     public TaskParser $taskParser;
     public TodofileLoader $todofileLoader;
 
-    public function __construct() {
+    /**
+     * @param array|null $argv
+     * @throws SyntaxError | TodoFileNotFoundException | UnsupportedExtensionException
+     */
+    public function __construct(?array $argv = null) {
         // CLIアプリケーション初期化
         $this->app = new Application('Todofile');
+
+        if ($argv !== null) {
+            $def = new InputDefinition([
+                new InputArgument('task', InputArgument::OPTIONAL),
+                new InputOption('file', 'f', InputOption::VALUE_REQUIRED),
+            ]);
+            $this->input = new ArgvInput($argv, $def);
+        }
+
         $this->executor = new CommandExecutor();
-        $this->todofileLoader = new TodofileLoader();
+        $this->todofileLoader = new TodofileLoader($this->getOption('file'));
         $this->taskParser = new TaskParser($this->todofileLoader);
 
         self::$config = new Config($this->todofileLoader);
@@ -44,9 +65,7 @@ class Main {
      * @throws Exception
      */
     public function run(): int {
-        global $argv;
-
-        $taskName = $argv[1] ?? null;
+        $taskName = $this->input->getFirstArgument();
 
         if ($taskName === null || $taskName[0] === "!" ) {
             $this->app->run();
@@ -109,4 +128,30 @@ class Main {
 
         return 0;
     }
+
+    /**
+     * @param string $name オプション名
+     * @return mixed オプション値
+     */
+    public function getOption(string $name): mixed {
+        if ($this->getInput() === null || !$this->getInput()->hasOption($name))
+            return null;
+
+        return $this->getInput()->getOption($name);
+    }
+
+    /**
+     * @return ArgvInput|null 引数、オプション入力のオブジェ
+     */
+    public function getInput(): ?ArgvInput {
+        return $this->input;
+    }
+
+    /**
+     * @return Application CLIアプリ
+     */
+    public function getApp(): Application {
+        return $this->app;
+    }
+
 }
