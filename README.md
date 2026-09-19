@@ -1,4 +1,4 @@
-# Todofile v0.0.6
+# Todofile v0.0.7
 PHP製CLIタスクランナー
 
 Todofileは `todofile.json5` もしくは `todofile.json` で定義します（引数`-f`, `--file=`でファイル名を指定可能）

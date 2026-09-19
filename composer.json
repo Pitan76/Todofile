@@ -15,6 +15,7 @@
     ],
     "require": {
         "php": "^8.5",
+        "composer-runtime-api": "^2.2",
         "symfony/console": "^6.4",
         "colinodell/json5": "^3.0"
     },

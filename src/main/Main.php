@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class Main {
     public const string NAME = 'Todofile';
-    public const string VERSION = '0.0.6';
+    public const string VERSION = '0.0.7';
 
     public static Main $INSTANCE;
     public static Config $config;
