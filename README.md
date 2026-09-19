@@ -1,11 +1,44 @@
-# Todofile v0.0.1
+# Todofile v0.0.2
 PHP製CLIタスクランナー
 
-Todofileは `todo.json` で定義します
+Todofileは `todofile.json5` で定義します
+
+## 使い方
+
+### インストール
+※インストールにはPHPのパッケージマネージャである https://getcomposer.org/ が必要です。
+
+```bash
+composer global require pitan76/todo
+```
+
+### todofile.json の作成
+`todofile.json5` はTodofileが読み込むタスクファイルで、実行するコマンドや設定を定義します。<br />
+設定は以下のとおりです。
+
+```json
+{
+  // 設定
+  "@config": {
+    // コマンド実行エラーを無視して次のコマンドを実行する
+    "ignoreCommandExecuteException": false
+  },
+  // 以下のように"タスク名": "コマンド" もしくは "タスク名": {"コマンド", ...} のように記述する
+  "lint": "vendor/bin/phpstan analyse src",
+  "test": [
+    "vendor/bin/phpunit --testdox"
+  ],
+  "composer": [
+    "composer install",
+    "echo installed"
+  ]
+}
+```
 
 ## セットアップ
 ```bash
-git clone https://github.com/Pitan76/Todofile.git
+git clone git@github.com:Pitan76/Todofile.git
+# git clone https://github.com/Pitan76/Todofile.git
 cd Todofile
 composer install
 ```
@@ -40,5 +73,5 @@ composer dump-autoload
 # or
 
 # todofileでやってみる
-./todofile composer-reload
+./todo composer-reload
 ```

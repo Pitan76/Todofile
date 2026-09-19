@@ -5,6 +5,10 @@
   "hello": [
     "echo hello"
   ],
+  "hoge": [
+    "todofile hello",
+    "echo hoge"
+  ],
   "test": [
     "vendor/bin/phpunit --testdox"
   ],

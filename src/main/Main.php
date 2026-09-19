@@ -13,13 +13,7 @@ use Symfony\Component\Console\Application;
 
 class Main {
 
-    /**
-     * タスクファイル名
-     */
-    public const string FILENAME = "todo.json";
-
     public static Main $INSTANCE;
-
     public static Config $config;
 
     // symfony/console CLIのアプリケーション
@@ -32,7 +26,7 @@ class Main {
         // CLIアプリケーション初期化
         $this->app = new Application('Todofile');
         $this->executor = new CommandExecutor();
-        $this->todofileLoader = new TodofileLoader(self::FILENAME);
+        $this->todofileLoader = new TodofileLoader();
         $this->taskParser = new TaskParser($this->todofileLoader);
 
         self::$config = new Config($this->todofileLoader);
