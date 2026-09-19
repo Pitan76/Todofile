@@ -1,22 +1,35 @@
 {
+  // phpunitとphpstanのチェックを両方やる
+  "check": [
+    "todo test",
+    "todo lint"
+  ],
+
+  // テスト実行
+  "test": "vendor/bin/phpunit --testdox",
+
+  // コードチェック
+  "lint": "vendor/bin/phpstan analyse src",
+
+  // 依存関係のインストール
+  "composer": [
+    "composer install"
+  ],
+
+  // autoload関連を再生成
+  "composer-reload": "composer dump-autoload",
+
   "@config": {
     // コマンド実行エラーを無視して次のコマンドを実行する
     "ignoreCommandExecuteException": false
   },
+
   // 以下のように"タスク名": "コマンド" もしくは "タスク名": {"コマンド", ...} のように記述する
   "hello": [
     "echo hello"
   ],
   "hoge": [
-    "todofile hello",
+    "todo hello",
     "echo hoge"
   ],
-  "test": [
-    "vendor/bin/phpunit --testdox"
-  ],
-  "lint": "vendor/bin/phpstan analyse src",
-  "composer": [
-    "composer install"
-  ],
-  "composer-reload": "composer dump-autoload"
 }
