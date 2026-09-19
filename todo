@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-php "$(dirname "$0")/bin/todo" "$@"
+php run.php
