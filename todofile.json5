@@ -1,7 +1,9 @@
 {
   "@config": {
+    // コマンド実行エラーを無視して次のコマンドを実行する
     "ignoreCommandExecuteException": false
   },
+  // 以下のように"タスク名": "コマンド" もしくは "タスク名": {"コマンド", ...} のように記述する
   "hello": [
     "echo hello"
   ],
