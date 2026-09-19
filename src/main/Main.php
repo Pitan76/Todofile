@@ -19,6 +19,8 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
 class Main {
+    public const string NAME = 'Todofile';
+    public const string VERSION = '0.0.6';
 
     public static Main $INSTANCE;
     public static Config $config;
@@ -47,7 +49,7 @@ class Main {
             $this->input = new ArgvInput($argv, $def);
 
             if ($this->input->getOption("version")) {
-                echo "v0.0.6";
+                echo self::NAME . " v" . self::VERSION . PHP_EOL;
                 exit(0);
             }
         }
